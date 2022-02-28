@@ -1,0 +1,85 @@
+*  Generated for: PrimeSim
+*  Design library name: ring_counter
+*  Design cell name: ring_counter_tb_2
+*  Design view name: schematic
+.lib 'saed32nm.lib' TT
+
+*Custom Compiler Version S-2021.09
+*Mon Feb 28 13:48:54 2022
+
+.global gnd! vdd!
+********************************************************************************
+* Library          : ring_counter
+* Cell             : d_ff
+* View             : schematic
+* View Search List : hspice hspiceD schematic spice veriloga
+* View Stop List   : hspice hspiceD
+********************************************************************************
+.subckt d_ff clk data ff_out gnd_1 vcc vt_bulk_n_gnd! vt_bulk_p_vdd!
+xm19 net47 clk gnd_1 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm17 ff_out clk net45 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm10 ff_out net55 gnd_1 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm9 net55 net45 gnd_1 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm15 net45 net47 net54 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm3 net24 net47 net54 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm2 net54 net52 gnd_1 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm1 net52 net24 gnd_1 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm0 data clk net24 vt_bulk_n_gnd! n105 w=0.1u l=0.03u nf=1 m=1
+xm20 net47 clk vcc vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm18 ff_out net47 net45 vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm13 ff_out net55 vcc vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm12 net55 net45 vcc vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm16 net45 clk net54 vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm7 net24 clk net54 vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm6 net54 net52 vcc vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm5 net52 net24 vcc vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+xm4 data net47 net24 vt_bulk_p_vdd! p105 w=0.1u l=0.03u nf=1 m=1
+.ends d_ff
+
+********************************************************************************
+* Library          : ring_counter
+* Cell             : ring_counter_tb_2
+* View             : schematic
+* View Search List : hspice hspiceD schematic spice veriloga
+* View Stop List   : hspice hspiceD
+********************************************************************************
+xi3 clk d_ff3_out d_ff4_out net58 net17 gnd! vdd! d_ff
+xi2 clk d_ff2_out d_ff3_out net58 net17 gnd! vdd! d_ff
+xi1 clk d_ff1_out d_ff2_out net58 net17 gnd! vdd! d_ff
+xi0 clk net64 d_ff1_out net58 net17 gnd! vdd! d_ff
+vdata net64 net58 dc=0 pulse ( 0 1.5 0 0.1u 0.1u 13u 100u )
+vclk clk net58 dc=0 pulse ( 1.5 0 0 0.1u 0.1u 12.5u 25u )
+v5 net17 net58 dc=1.6
+c8 d_ff4_out net58 c=1p
+c7 d_ff3_out net58 c=1p
+c6 d_ff2_out net58 c=1p
+cs d_ff1_out net58 c=1p
+
+
+
+
+
+
+
+
+.tran '0.1u' '500u' start=100u name=tran
+
+.option primesim_remove_probe_prefix = 0
+.probe v(*) i(*) level=1
+.probe tran v(clk) v(d_ff1_out) v(d_ff2_out) v(d_ff3_out) v(d_ff4_out)
+
+.temp 25
+
+
+
+.option primesim_output=wdf
+
+
+.option parhier = LOCAL
+
+
+
+
+
+
+.end
